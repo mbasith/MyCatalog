@@ -1,0 +1,60 @@
+{% include "main.html" %} {% include "header.html" %}
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en">
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+</head>
+
+<body>
+
+
+  <h1>{{genre.name}}</h1>
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>
+      <strong> {{message}} </strong>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %} {% for i in items %}
+  <div>
+    &emsp;
+    <b>Name:</b> {{i.name}}
+    <br> &emsp;
+    <b>Item No:</b> {{i.id}}
+    <br> &emsp;
+    <b>Description:</b> {{i.description}}
+    <br> &emsp;
+    <b>Price:</b> ${{i.price}}
+    <br> &emsp;
+    <b>Platform:</b> {{i.platform}}
+    <br> &emsp;
+    <b>Rating:</b>
+    <br>
+
+    <span id="Rated"></span>
+    <fieldset class="full_star">&emsp; {% for start in range((i.rating | int)) %}
+      <input type="radio" id="full_star" name="rated" value="1" />
+      <label class="full" for="full_star" title="1 star"></label>
+      {% endfor %}
+    </fieldset>
+    <fieldset class="empty_star">
+      {% for start in range((5 - (i.rating | int))) %}
+      <input type="radio" id="empty_star" name="rated" value="1" />
+      <label class="full" for="empty_star" title="1 star"></label>
+      {% endfor %}
+    </fieldset>
+    <br>
+
+
+    <br>
+    <br>
+  </div>
+  {% endfor %}
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+</head>
+
+<head></head>
+
+<body>
+  <h1>Retro Video Games</h1>
+  <a href="{{url_for('newgenre')}}" class="btn btn-success btn-sm" role="button" aria-disabled="true">Create Video Game Genre</a>
+  <br>
+  <br> {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>
+      <strong> {{message}} </strong>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %} {% for genre in genres | sort(attribute='name') %}
+
+  <a href="{{url_for('showgame', genre_id = genre.id)}}">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10 restaurant-list">
+        <h3>{{genre.name}}</h3>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </a>
+  <br> {% endfor %} {% endblock %}
+</body>
+
+</html>

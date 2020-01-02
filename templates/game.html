@@ -1,0 +1,68 @@
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en"> {% include "main.html" %} {% include "header.html" %}
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+</head>
+
+<body>
+
+  <h1>{{genre.name}}</h1>
+  <!--<a href="{{url_for('editgenre', genre_id = genre.id)}}">Edit Genre</a> -->
+  <a href="{{url_for('editgenre', genre_id = genre.id)}}" class="btn btn-warning btn-sm" role="button" aria-disabled="true">Edit Genre</a>
+  <a href="{{url_for('deletegenre', genre_id = genre.id) }}" class="btn btn-danger btn-sm" role="button" aria-disabled="true">Delete Genre</a>
+  <a href="{{url_for('newgame', genre_id = genre.id) }}" class="btn btn-success btn-sm" role="button" aria-disabled="true">Add New Game</a>
+  <br>
+  <br> {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>
+      <strong> {{message}} </strong>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %} {% for i in items %}
+  <div>
+    <b>Name:</b> {{i.name}}
+    <br>
+    <b>Item No:</b> {{i.id}}
+    <br>
+    <b>Description:</b> {{i.description}}
+    <br>
+    <b>Price:</b> ${{i.price}}
+    <br>
+    <b>Platform:</b> {{i.platform}}
+    <br>
+    <b>Rating:</b>
+    <br>
+
+    <span id="Rated"></span>
+    <fieldset class="full_star">
+      {% for start in range((i.rating | int)) %}
+      <input type="radio" id="full_star" name="rated" value="1" />
+      <label class="full" for="full_star" title="1 star"></label>
+      {% endfor %}
+    </fieldset>
+    <fieldset class="empty_star">
+      {% for start in range((5 - (i.rating | int))) %}
+      <input type="radio" id="empty_star" name="rated" value="1" />
+      <label class="full" for="empty_star" title="1 star"></label>
+      {% endfor %}
+    </fieldset>
+    <br>
+    <br>
+
+
+
+    <a href="{{url_for('editgame', genre_id = genre.id, game_id = i.id) }}">Edit</a>
+    <a href="{{url_for('deletegame', genre_id = genre.id, game_id = i.id ) }}">Delete</a>
+    <br>
+    <br>
+    <br>
+  </div>
+  {% endfor %}
+</body>
+
+</html>

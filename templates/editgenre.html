@@ -1,0 +1,35 @@
+{% include "main.html" %} {% include "header.html" %}
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+</head>
+
+<body>
+  <h1>Edit Genre Name</h1>
+
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>
+      <strong> {{message}} </strong>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+
+  <form action="{{ url_for('editgenre', genre_id=genre.id)}}" method='POST'>
+
+    <p>&emsp;New Name:</p>
+
+    &emsp;
+    <input type='text' size='30' name='name' placeholder="{{genre.name}}" required>
+    <input class="btn btn-outline-danger btn-sm" type="submit" value="Edit">
+    <a href="{{url_for('showgenres')}}" class="btn btn-outline-primary btn-sm" role="button" aria-disabled="true">Cancel</a>
+
+  </form>
+
+
+</body>
+
+</html>
